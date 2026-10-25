@@ -17,6 +17,7 @@ feature {NONE} -- Initialization
 			create lib_tests
 			run_test (agent lib_tests.test_flags_and_stretches, "flags_and_stretches")
 			run_test (agent lib_tests.test_set_text_cuts_spans, "set_text_cuts_spans")
+			run_test (agent lib_tests.test_take_copies, "take_copies")
 			run_test (agent lib_tests.test_unicode_text_kept, "unicode_text_kept")
 			run_test (agent lib_tests.test_numbers_and_plain_text, "numbers_and_plain_text")
 			run_test (agent lib_tests.test_insert_replace_remove, "insert_replace_remove")

@@ -37,7 +37,7 @@ end
 ./EIFGENs/simple_document_tests/F_code/simple_document.exe
 ```
 
-Depends only on EiffelBase. Void-safe, SCOOP-compatible, every class with contracts. 6 tests pass at 0.1.0.
+Depends only on EiffelBase. Void-safe, SCOOP-compatible, every class with contracts. 7 tests pass at 0.1.0.
 
 ## License
 

@@ -303,6 +303,34 @@ feature -- Element change
 			never_more_spans: span_count <= old span_count
 		end
 
+	take (a_other: DOC_TEXT)
+			-- The characters and spans of `a_other', copied: a reader that
+			-- built a text apart hands it to the block or cell it fills.
+		local
+			k: INTEGER
+		do
+			create text.make_from_string (a_other.text)
+			kinds.wipe_out
+			starts.wipe_out
+			counts.wipe_out
+			targets.wipe_out
+			from
+				k := 1
+			until
+				k > a_other.span_count
+			loop
+				kinds.extend (a_other.span_kind (k))
+				starts.extend (a_other.span_start (k))
+				counts.extend (a_other.span_length (k))
+				targets.extend (a_other.span_target (k).twin)
+				k := k + 1
+			end
+			revision := revision + 1
+		ensure
+			same: is_same_as (a_other)
+			changed: revision > old revision
+		end
+
 	remove_spans
 			-- Plain again.
 		do

@@ -18,7 +18,8 @@ SW_DOC_BLOCK, SW_RICH_TEXT), which had no outside users yet.
 - New against the widget version: code blocks; inline code and
   strikethrough; `flags_at` and `stretch_end` in place of the shaping-specific
   styles (this library knows nothing of drawing); `insert`, `replace` and
-  `add_block` for an editor; `is_same_as` on all three for round-trip tests.
+  `add_block` for an editor; `take` copies one text into another (a reader
+  fills a block or cell); `is_same_as` on all three for round-trip tests.
 - Tests: flags and stretches over overlapping spans, cutting spans on a text
   change, pointed Hebrew and polytonic Greek held as typed, numbering and plain
-  text, insert / replace / remove, and sameness. 6 pass.
+  text, insert / replace / remove, sameness, and `take` (copy a text). 7 pass.

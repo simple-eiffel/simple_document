@@ -56,6 +56,21 @@ feature -- DOC_TEXT
 			assert_integers_equal ("plain", 0, r.span_count)
 		end
 
+	test_take_copies
+			-- `take' copies the characters and spans, and the copy is apart.
+		local
+			a, b: DOC_TEXT
+		do
+			create a.make ("see John 3:16")
+			a.add_link (5, 9, "John 3:16")
+			a.add_bold (1, 3)
+			create b.make ("old")
+			b.take (a)
+			assert_true ("the same", b.is_same_as (a))
+			a.set_text ("changed")
+			assert_true ("apart", b.text.same_string ("see John 3:16") and b.span_count = 2)
+		end
+
 	test_unicode_text_kept
 			-- Pointed Hebrew and polytonic Greek are held as typed.
 		local
