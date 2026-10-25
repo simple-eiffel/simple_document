@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple_document - Eiffel Rich Document Model</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>simple_document</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#overview" class="active">Overview</a></li>
+            <li><a href="#model">The Model</a></li>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li><a href="#users">Who Uses It</a></li>
+            <li><a href="#testing">Building and Testing</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <header>
+            <h1>simple_document</h1>
+            <p class="tagline">A rich document model for Eiffel: Unicode text in blocks, with inline styles and links</p>
+        </header>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>
+                <strong>simple_document</strong> is one model for every library that reads,
+                shows or writes a rich document. It holds Unicode text in blocks, with inline
+                styles and links. It knows no markup and draws nothing.
+            </p>
+            <p>
+                Version 0.1.0 is a pre-release. It was made for simple_bible (gap GW-13):
+                commentaries, lexicon entries, dictionary articles and notes. It depends only
+                on EiffelBase. Every class is void-safe, SCOOP-compatible and has contracts.
+            </p>
+        </section>
+
+        <section id="model">
+            <h2>The Model</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Responsibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>SIMPLE_DOCUMENT</code></td>
+                        <td>An ordered list of blocks. Gives <code>number_of</code> (a numbered item's number) and <code>plain_text</code> (what Copy gives). Edits with <code>add_*</code>, <code>insert</code>, <code>replace</code> and <code>remove</code>. Each <code>add_*</code> returns the new block's text so its spans can be added at once.</td>
+                    </tr>
+                    <tr>
+                        <td><code>DOC_BLOCK</code></td>
+                        <td>One block: a paragraph, a heading (levels 1 to 3), a bulleted or numbered item or a block quote (depths 1 to 3), a rule, a code block, or a table (a header row, then rows of cells). A code block is shown as typed, its line breaks kept, with no inline spans. A numbered item does not store its number.</td>
+                    </tr>
+                    <tr>
+                        <td><code>DOC_TEXT</code></td>
+                        <td>The characters of one text and the spans over them: bold, italic, small capitals, superscript, code, strikethrough, and links with a target. Spans may overlap. <code>flags_at</code> answers every kind over a character as one set of bits and <code>stretch_end</code> where that set changes, so a renderer walks the text one setting at a time. <code>revision</code> grows with every change, so a view re-measures only what changed.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                The text is the source: search, copy and a caret see it as typed.
+            </p>
+        </section>
+
+        <section id="installation">
+            <h2>Installation</h2>
+            <p>Add to your ECF:</p>
+            <pre><code>&lt;library name="simple_document" location="$SIMPLE_EIFFEL/simple_document/simple_document.ecf"/&gt;</code></pre>
+            <p>Set the environment variable (one-time setup for all simple_* libraries):</p>
+            <pre><code>set SIMPLE_EIFFEL=D:\prod</code></pre>
+        </section>
+
+        <section id="usage">
+            <h2>Usage</h2>
+            <pre><code>local
+    doc: SIMPLE_DOCUMENT
+    t: DOC_BLOCK
+do
+    create doc.make
+    doc.add_heading (1, "Notes").do_nothing
+    doc.add_paragraph ("For God so loved the world").add_link (1, 26, "John 3:16")
+    t := doc.add_table (&lt;&lt;"Word", "Gloss"&gt;&gt;)
+    t.add_row (&lt;&lt;"bara", "create"&gt;&gt;)
+    print (doc.plain_text)
+end</code></pre>
+        </section>
+
+        <section id="users">
+            <h2>Who Uses It</h2>
+            <ul>
+                <li><a href="https://github.com/simple-eiffel/simple_markdown">simple_markdown</a> reads Markdown into a document and writes one back out.</li>
+                <li><a href="https://github.com/simple-eiffel/simple_widgets">simple_widgets</a> shows and edits one (<code>SW_DOCUMENT_VIEW</code>).</li>
+                <li>A host builds one from other sources (simple_bible: a commentary's HTML).</li>
+            </ul>
+        </section>
+
+        <section id="testing">
+            <h2>Building and Testing</h2>
+            <pre><code>ec.sh test -config simple_document.ecf -target simple_document_tests
+./EIFGENs/simple_document_tests/F_code/simple_document.exe</code></pre>
+            <p>7 tests pass at 0.1.0.</p>
+        </section>
+
+        <footer>
+            <p>MIT License - Copyright (c) Larry Rix</p>
+            <p>Part of the <a href="https://github.com/simple-eiffel">simple_ library collection</a></p>
+        </footer>
+    </main>
+</body>
+</html>
