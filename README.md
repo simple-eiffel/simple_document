@@ -1,5 +1,7 @@
 # simple_document
 
+![Windows: tests pass](https://img.shields.io/badge/Windows-tests%20pass-0078D6?logo=windows&logoColor=white) ![Linux: tests pass](https://img.shields.io/badge/Linux-tests%20pass-FCC624?logo=linux&logoColor=black) ![macOS: tests pass](https://img.shields.io/badge/macOS-tests%20pass-000000?logo=apple&logoColor=white)
+
 A rich document model for the [Simple Eiffel](https://github.com/simple-eiffel) ecosystem: Unicode text in blocks, with inline styles and links. No markup and no rendering - one model for every library that reads, shows or writes a rich document.
 
 > **Status: 0.1.0 pre-release.** Made for simple_bible (gap GW-13): commentaries, lexicon entries, dictionary articles and notes.
